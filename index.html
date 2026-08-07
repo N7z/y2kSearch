@@ -7,7 +7,21 @@
     <title>y2kSearch</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" x-data="apod" x-cloak>
+      <p x-show="loading">loading...</p>
+
+      <template x-if="error">
+        <p x-text="error"></p>
+      </template>
+
+      <template x-if="data">
+        <article>
+          <h1 x-text="data.title"></h1>
+          <img :src="data.url" :alt="data.title" />
+          <p x-text="data.explanation"></p>
+        </article>
+      </template>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
