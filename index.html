@@ -8,6 +8,20 @@
   </head>
   <body>
     <div id="app" x-data="apod" x-cloak>
+      <div class="main">
+        <img class="logo" src="./img/logo.png" alt="logo" />
+
+        <div class="search-container">
+          <input
+            class="search-input"
+            type="text"
+            name="search"
+            placeholder="Search here..."
+          />
+          <button class="search-button" type="submit">Search</button>
+        </div>
+      </div>
+
       <p x-show="loading">loading...</p>
 
       <template x-if="error">
