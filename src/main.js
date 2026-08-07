@@ -3,6 +3,7 @@ import Alpine from "alpinejs";
 import "./style.css";
 
 const API_KEY = import.meta.env.VITE_NASA_API_KEY;
+const TIME_BEFORE_ABORT = 4000;
 
 Alpine.data("apod", () => ({
   loading: true,
@@ -25,10 +26,29 @@ Alpine.data("apod", () => ({
         this.data.url = savedUrl;
         this.data.explanation = savedExplanation;
       } else {
-        const response = await fetch(
-          `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`,
-        );
+        let response;
 
+        for (let attempt = 0; attempt < 3; attempt++) {
+          try {
+            response = await fetch(
+              `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`,
+              { signal: AbortSignal.timeout(TIME_BEFORE_ABORT) },
+            );
+
+            if (response.ok) break;
+            if (response.status < 500) break;
+          } catch {
+            response = undefined;
+          }
+
+          if (attempt < 2) {
+            await new Promise((resolve) =>
+              setTimeout(resolve, 500 * 2 ** attempt),
+            );
+          }
+        }
+
+        if (!response) throw new Error("No response from NASA");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         this.data = await response.json();
@@ -47,7 +67,6 @@ Alpine.data("apod", () => ({
         };
       } else {
         this.error = e.message;
-        await init();
       }
     } finally {
       this.loading = false;
