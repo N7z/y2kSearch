@@ -32,7 +32,7 @@ body {
   background: linear-gradient(180deg, #1e8fd5 0%, #14618f 55%, #0e4a6e 100%);
   height: 125px;
   border: 1px solid #14618f;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -46,7 +46,37 @@ body {
   margin: 0 auto;
 }
 
+.powered-by {
+  position: absolute;
+  right: 32px;
+  bottom: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+}
+
+.powered-by em {
+  font-style: italic;
+}
+
+.powered-by img {
+  height: 32px;
+  width: auto;
+}
+
+.types-container {
+  display: inline-flex;
+  margin: 0 25px;
+  position: relative;
+  bottom: 10%;
+  gap: 1rem;
+}
+
 .search-container {
+  position: relative;
   width: 60%;
   background: #f7fbfe;
   border: 1px solid #14618f;
