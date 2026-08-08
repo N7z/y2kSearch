@@ -29,29 +29,17 @@
             </div>
 
             <div>
-              <input
-                type="radio"
-                name="type"
-                id="images"
-                value="images"
-                checked
-              />
+              <input type="radio" name="type" id="images" value="images" />
               <label for="images">Images</label>
             </div>
 
             <div>
-              <input
-                type="radio"
-                name="type"
-                id="videos"
-                value="videos"
-                checked
-              />
+              <input type="radio" name="type" id="videos" value="videos" />
               <label for="videos">Videos</label>
             </div>
 
             <div>
-              <input type="radio" name="type" id="news" value="news" checked />
+              <input type="radio" name="type" id="news" value="news" />
               <label for="news">News</label>
             </div>
           </div>
@@ -72,10 +60,25 @@
       <template x-if="data">
         <article>
           <h1 x-text="data.title"></h1>
-          <img :src="data.url" :alt="data.title" />
-          <p x-text="data.explanation"></p>
+          <div class="article-body">
+            <img :src="data.url" :alt="data.title" />
+            <div class="text">
+              <p x-text="data.explanation"></p>
+              <p
+                class="copyright"
+                x-show="data.copyright"
+                x-text="data.copyright"
+              ></p>
+            </div>
+          </div>
         </article>
       </template>
+
+      <footer>
+        <p style="text-align: center">
+          paulo &copy; 2008 - All rights reserved.
+        </p>
+      </footer>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

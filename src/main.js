@@ -18,6 +18,7 @@ Alpine.data("apod", () => ({
     let savedTitle = localStorage.getItem("title:apod:v1");
     let savedUrl = localStorage.getItem("url:apod:v1");
     let savedExplanation = localStorage.getItem("explanation:apod:v1");
+    let savedCopyright = localStorage.getItem("copyright:apod:v1");
 
     try {
       if (!needsToFetch) {
@@ -25,6 +26,7 @@ Alpine.data("apod", () => ({
         this.data.title = savedTitle;
         this.data.url = savedUrl;
         this.data.explanation = savedExplanation;
+        this.data.copyright = savedCopyright;
       } else {
         let response;
 
@@ -53,6 +55,12 @@ Alpine.data("apod", () => ({
 
         this.data = await response.json();
 
+        if (this.data.copyright) {
+          let copyright = `Image by ${this.data.copyright.trim()}`;
+          this.data.copyright = copyright;
+          localStorage.setItem("copyright:apod:v1", copyright);
+        }
+
         localStorage.setItem("title:apod:v1", this.data.title);
         localStorage.setItem("url:apod:v1", this.data.url);
         localStorage.setItem("explanation:apod:v1", this.data.explanation);
@@ -64,6 +72,7 @@ Alpine.data("apod", () => ({
           title: savedTitle,
           url: savedUrl,
           explanation: savedExplanation,
+          copyright: savedCopyright,
         };
       } else {
         this.error = e.message;
