@@ -12,42 +12,47 @@
         <img class="logo" src="./img/logo.png" alt="logo" />
 
         <div class="search-container">
-          <input
-            class="search-input"
-            type="text"
-            name="search"
-            placeholder="Search here..."
-          />
-          <button class="search-button" type="submit">Search</button>
+          <form>
+            <input
+              class="search-input"
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search here..."
+            />
+            <button class="search-button" id="search-button" type="submit">
+              Search
+            </button>
 
-          <br />
+            <br />
 
-          <div class="types-container">
-            <div>
-              <input type="radio" name="type" id="all" value="all" checked />
-              <label for="all">All</label>
+            <div class="types-container">
+              <div>
+                <input type="radio" name="type" id="all" value="" checked />
+                <label for="all">All</label>
+              </div>
+
+              <div>
+                <input type="radio" name="type" id="images" value="isch" />
+                <label for="images">Images</label>
+              </div>
+
+              <div>
+                <input type="radio" name="type" id="videos" value="vid" />
+                <label for="videos">Videos</label>
+              </div>
+
+              <div>
+                <input type="radio" name="type" id="news" value="nws" />
+                <label for="news">News</label>
+              </div>
             </div>
 
-            <div>
-              <input type="radio" name="type" id="images" value="images" />
-              <label for="images">Images</label>
-            </div>
-
-            <div>
-              <input type="radio" name="type" id="videos" value="videos" />
-              <label for="videos">Videos</label>
-            </div>
-
-            <div>
-              <input type="radio" name="type" id="news" value="news" />
-              <label for="news">News</label>
-            </div>
-          </div>
-
-          <span class="powered-by">
-            <em>powered by</em>
-            <img src="./img/nasa.svg" alt="NASA" />
-          </span>
+            <span class="powered-by">
+              <em>powered by</em>
+              <img src="./img/nasa.svg" alt="NASA" />
+            </span>
+          </form>
         </div>
       </div>
 

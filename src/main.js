@@ -4,6 +4,7 @@ import "./style.css";
 
 const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const TIME_BEFORE_ABORT = 4000;
+const SEARCH_TEMPLATE = "https://www.google.com/search";
 
 Alpine.data("apod", () => ({
   loading: true,
@@ -11,6 +12,21 @@ Alpine.data("apod", () => ({
   error: null,
 
   async init() {
+    // Search engine logic
+    let searchInput = document.getElementById("search");
+    let searchForm = document.querySelector("form");
+
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let query = searchInput.value;
+      let type = document.querySelector('input[name="type"]:checked').value;
+      let targetUrl =
+        SEARCH_TEMPLATE + `?q=${encodeURIComponent(query)}&tbm=${type}`;
+      window.location = targetUrl;
+    });
+
+    // Nasa fetching logic
     let savedAt = localStorage.getItem("savedAt:apod:v1");
     let needsToFetch =
       savedAt == null || Date.now() - Date.parse(savedAt) >= 60 * 60 * 1000;
